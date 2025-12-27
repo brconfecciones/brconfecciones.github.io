@@ -1,295 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>BR Confecciones – Confección a Medida</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-
-  <!-- Meta etiquetas para redes sociales (Open Graph) -->
   <meta property="og:title" content="BR Confecciones – Hecho a tu medida">
   <meta property="og:description" content="Confección artesanal en Capilla del Monte: disfraces, ropa a medida, cortinas y accesorios únicos. ¡Escribinos por WhatsApp!">
   <meta property="og:image" content="https://brconfecciones.github.io/img/Logo1.jpg">
   <meta property="og:url" content="https://brconfecciones.github.io/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_AR">
-
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: #1b1410;
-      color: #ffffff;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* Fondo general en loop (telas/hilos) */
-    .fondo-loop {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
-    }
-
-    .fondo-loop video {
-      min-width: 100%;
-      min-height: 100%;
-      width: auto;
-      height: auto;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      object-fit: cover;
-      opacity: 0.85;
-    }
-
-    /* Video de cabecera (sin loop) */
-    .video-cabecera {
-      width: 100%;
-      max-width: 800px;
-      margin: 60px auto 20px;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-      position: relative;
-      z-index: 1;
-    }
-
-    .video-cabecera video {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* Texto descriptivo (debajo del video) */
-    .descripcion {
-      text-align: center;
-      padding: 25px 30px;
-      max-width: 700px;
-      margin: 0 auto 30px;
-      background: rgba(20, 15, 12, 0.85);
-      backdrop-filter: blur(2px);
-      border: 1px solid #3a2e25;
-      border-radius: 12px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .descripcion h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.4em;
-      color: #f5e6cc;
-      margin: 15px 0;
-      text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
-    }
-
-    .descripcion p {
-      font-size: 1.1em;
-      color: #d4c5a8;
-      margin: 20px auto;
-      font-weight: 400;
-    }
-
-    .galeria {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 25px;
-      padding: 30px 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .producto {
-      width: 100%;
-      max-width: 280px;
-      background: rgba(31, 24, 19, 0.88);
-      backdrop-filter: blur(2px);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
-      border: 1px solid #3a2e25;
-    }
-
-    .producto:hover {
-      transform: translateY(-6px);
-      box-shadow:
-        0 12px 24px rgba(0, 0, 0, 0.5),
-        0 0 22px rgba(212, 175, 55, 0.4),
-        inset 0 0 18px rgba(212, 175, 55, 0.25);
-    }
-
-    .producto img {
-      width: 100%;
-      height: 200px;
-      object-fit: contain;
-      object-position: center;
-      border-bottom: 1px solid #3a2e25;
-      background: #1f1813;
-    }
-
-    .producto .info {
-      padding: 16px;
-    }
-
-    .producto h3 {
-      color: #f5e6cc;
-      margin: 0 0 10px;
-      font-size: 1.25em;
-      font-family: 'Cormorant Garamond', serif;
-    }
-
-    .producto p {
-      color: #c8b89f;
-      font-size: 0.95em;
-      margin: 6px 0;
-    }
-
-    .contacto {
-      text-align: center;
-      padding: 40px 20px;
-      background: rgba(23, 17, 13, 0.85);
-      backdrop-filter: blur(2px);
-      margin-top: 30px;
-      border-top: 1px solid #3a2e25;
-      position: relative;
-      z-index: 1;
-    }
-
-    .contacto h2 {
-      color: #f5e6cc;
-      margin-bottom: 15px;
-      font-family: 'Cormorant Garamond', serif;
-    }
-
-    .contacto p {
-      color: #d4c5a8;
-      max-width: 600px;
-      margin: 0 auto 20px;
-    }
-
-    /* Animación de pulso para el botón de WhatsApp */
-    @keyframes pulsoSuave {
-      0%, 100% {
-        box-shadow: 0 0 12px rgba(37, 211, 102, 0.4),
-                    0 0 24px rgba(37, 211, 102, 0.25);
-      }
-      50% {
-        box-shadow: 0 0 18px rgba(37, 211, 102, 0.6),
-                    0 0 32px rgba(37, 211, 102, 0.35);
-      }
-    }
-
-    .btn-whatsapp {
-      display: inline-block;
-      background: #25D366;
-      color: white;
-      padding: 12px 28px;
-      border-radius: 24px;
-      text-decoration: none;
-      font-weight: 600;
-      font-family: 'Montserrat', sans-serif;
-      animation: pulsoSuave 4s ease-in-out infinite;
-      transition: background 0.3s, transform 0.2s;
-    }
-    .btn-galeria {
-      display: inline-block;
-      background: transparent;
-      color: #f5e6cc;
-      padding: 8px 20px;
-      border: 1px solid #3a2e25;
-      border-radius: 18px;
-      text-decoration: none;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.95em;
-      margin-top: 15px;
-      transition: all 0.3s ease;
-    }
-
-    .btn-galeria:hover {
-      background: rgba(212, 175, 55, 0.1);
-      border-color: #d4c5a8;
-      color: #ffffff;
-    }
-    .btn-whatsapp:hover {
-      background: #128C7E;
-      transform: scale(1.05);
-      animation-play-state: paused;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px 20px;
-      font-size: 0.95em;
-      color: #b8a580;
-      border-top: 1px solid #3a2e25;
-      margin-top: 20px;
-      background: rgba(20, 15, 12, 0.85);
-      backdrop-filter: blur(2px);
-      position: relative;
-      z-index: 1;
-    }
-
-    footer a {
-      color: #25D366;
-      text-decoration: none;
-    }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-      .video-cabecera {
-        margin: 40px 10px 10px;
-      }
-      .descripcion {
-        padding: 20px 10px;
-      }
-      .producto {
-        max-width: 95%;
-      }
-    }
+    *{box-sizing:border-box}body{margin:0;padding:0;font-family:'Montserrat',sans-serif;background:#1b1410;color:#fff;line-height:1.6;overflow-x:hidden}.fondo-loop{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;overflow:hidden}.fondo-loop video{min-width:100%;min-height:100%;width:auto;height:auto;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);object-fit:cover;opacity:.85}.video-cabecera{width:100%;max-width:800px;margin:60px auto 20px;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.5);position:relative;z-index:1}.video-cabecera video{width:100%;height:auto;display:block}.descripcion{text-align:center;padding:25px 30px;max-width:700px;margin:0 auto 30px;background:rgba(20,15,12,.85);backdrop-filter:blur(2px);border:1px solid #3a2e25;border-radius:12px;position:relative;z-index:1}.descripcion h1{font-family:'Cormorant Garamond',serif;font-size:2.4em;color:#f5e6cc;margin:15px 0;text-shadow:0 0 8px rgba(212,175,55,.4)}.descripcion p{font-size:1.1em;color:#d4c5a8;margin:20px auto;font-weight:400}.galeria{display:flex;flex-wrap:wrap;justify-content:center;gap:25px;padding:30px 20px;max-width:1200px;margin:0 auto;position:relative;z-index:1}.producto{width:100%;max-width:280px;background:rgba(31,24,19,.88);backdrop-filter:blur(2px);border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.4);transition:transform .35s ease,box-shadow .35s ease;border:1px solid #3a2e25}.producto:hover{transform:translateY(-6px);box-shadow:0 12px 24px rgba(0,0,0,.5),0 0 22px rgba(212,175,55,.4),inset 0 0 18px rgba(212,175,55,.25)}.producto img{width:100%;height:200px;object-fit:contain;object-position:center;border-bottom:1px solid #3a2e25;background:#1f1813}.producto .info{padding:16px}.producto h3{color:#f5e6cc;margin:0 0 10px;font-size:1.25em;font-family:'Cormorant Garamond',serif}.producto p{color:#c8b89f;font-size:.95em;margin:6px 0}.contacto{text-align:center;padding:40px 20px;background:rgba(23,17,13,.85);backdrop-filter:blur(2px);margin-top:30px;border-top:1px solid #3a2e25;position:relative;z-index:1}.contacto h2{color:#f5e6cc;margin-bottom:15px;font-family:'Cormorant Garamond',serif}.contacto p{color:#d4c5a8;max-width:600px;margin:0 auto 20px}@keyframes pulsoSuave{0%,100%{box-shadow:0 0 12px rgba(37,211,102,.4),0 0 24px rgba(37,211,102,.25)}50%{box-shadow:0 0 18px rgba(37,211,102,.6),0 0 32px rgba(37,211,102,.35)}}.btn-whatsapp{display:inline-block;background:#25D366;color:#fff;padding:12px 28px;border-radius:24px;text-decoration:none;font-weight:600;font-family:'Montserrat',sans-serif;animation:pulsoSuave 4s ease-in-out infinite;transition:background .3s,transform .2s}.btn-galeria{display:inline-block;background:transparent;color:#f5e6cc;padding:8px 20px;border:1px solid #3a2e25;border-radius:18px;text-decoration:none;font-family:'Montserrat',sans-serif;font-size:.95em;margin-top:15px;transition:all .3s ease}.btn-galeria:hover{background:rgba(212,175,55,.1);border-color:#d4c5a8;color:#fff}.btn-whatsapp:hover{background:#128C7E;transform:scale(1.05);animation-play-state:paused}footer{text-align:center;padding:25px 20px;font-size:.95em;color:#b8a580;border-top:1px solid #3a2e25;margin-top:20px;background:rgba(20,15,12,.85);backdrop-filter:blur(2px);position:relative;z-index:1}footer a{color:#25D366;text-decoration:none}@media (max-width:600px){.video-cabecera{margin:40px 10px 10px}.descripcion{padding:20px 10px}.producto{max-width:95%}}
   </style>
 </head>
 <body>
-
-  <!-- Fondo general en loop -->
   <div class="fondo-loop">
     <video autoplay muted loop playsinline>
       <source src="img/fondo-br.mp4" type="video/mp4">
-      Tu navegador no soporta el video de fondo.
     </video>
   </div>
-
-  <!-- Video de cabecera (sin loop) -->
   <div class="video-cabecera">
-    <video autoplay muted playsinline id="hero-video">
+    <video autoplay muted playsinline>
       <source src="img/brconfecciones-hero.mp4" type="video/mp4">
-      Tu navegador no soporta el video.
     </video>
   </div>
-
-  <!-- Descripción (debajo del video, sin logo) -->
   <div class="descripcion">
     <h1>BR Confecciones</h1>
     <p>Confección a medida para toda la familia. Disfraces, ropa de baile, cortinas, accesorios y más — hechos con dedicación y calidad donde tu estilo cobra vida.</p>
     <a href="galeria.html" class="btn-galeria">📸 Galería de trabajos</a>
   </div>
-
   <div class="galeria">
-    <!-- Producto 1 -->
     <div class="producto">
       <img src="img/disfraz1.png" alt="Disfraz a medida">
       <div class="info">
@@ -297,8 +40,6 @@
         <p>Elegantes, cómodos y únicos. Ideales para teatro, fiestas o eventos temáticos.</p>
       </div>
     </div>
-
-    <!-- Producto 2 -->
     <div class="producto">
       <img src="img/ropa-medida.png" alt="Ropa a medida">
       <div class="info">
@@ -306,8 +47,6 @@
         <p>Blusas, vestidos, trajes y más, cosidos a tu gusto y talla exacta.</p>
       </div>
     </div>
-
-    <!-- Producto 3 -->
     <div class="producto">
       <img src="img/ropa-baile.png" alt="Ropa de baile">
       <div class="info">
@@ -315,8 +54,6 @@
         <p>Pantalones, tops y conjuntos diseñados para libertad de movimiento y estilo.</p>
       </div>
     </div>
-
-    <!-- Producto 4 -->
     <div class="producto">
       <img src="img/linea-gastronomica.png" alt="Linea gastronomica">
       <div class="info">
@@ -325,56 +62,24 @@
       </div>
     </div>
   </div>
-
   <div class="contacto">
     <h2>¿Te gustó lo que viste?</h2>
     <p>Escribinos por WhatsApp y contanos qué necesitas. ¡Hacemos realidad tu idea!</p>
     <a href="https://wa.me/543548584454" class="btn-whatsapp">💬 Contáctanos por WhatsApp</a>
   </div>
-
   <footer>
     BR Confecciones — Capilla del Monte, Córdoba<br>
     © 2025. Todos los derechos reservados.<br>
-    <small style="color: #d4c5a8; margin-top: 12px; display: block;">
+    <small style="color:#d4c5a8;margin-top:12px;display:block;">
       ¿Te gustó esta web? Desarrollo sitios simples, elegantes y funcionales para emprendimientos como el tuyo.<br>
-      <a href="https://wa.me/543548584454" style="color: #25D366; text-decoration: none; font-weight: 500;">
+      <a href="https://wa.me/543548584454" style="color:#25D366;text-decoration:none;font-weight:500;">
         💬 Consultá por tu web personalizada
       </a>
     </small>
-    <div style="font-size:0.85em; color:#b8a580; margin-top:10px; text-align:center;">
-      📊 Visitas: <img src="https://cdn.counter.dev/counter.png?id=ddd285d0-34a0-487e-9239-9e7a9c467fcb" alt="Visitas" style="vertical-align:middle; margin-left:6px;">
+    <div style="font-size:0.85em;color:#b8a580;margin-top:10px;text-align:center;">
+      📊 Visitas: <img src="https://cdn.counter.dev/counter.png?id=ddd285d0-34a0-487e-9239-9e7a9c467fcb" alt="Visitas" style="vertical-align:middle;margin-left:6px;">
     </div>
   </footer>
-
-  <!-- Script de Counter.dev (tracking + visual) -->
   <script src="https://cdn.counter.dev/script.js" data-id="ddd285d0-34a0-487e-9239-9e7a9c467fcb" data-utcoffset="-3"></script>
-  
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
