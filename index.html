@@ -341,10 +341,27 @@
         💬 Consultá por tu web personalizada
       </a>
     </small>
-  </footer>
+     <div id="goatcounter-visitas" style="font-size: 0.85em; color: #b8a580; margin-top: 10px;"></div>
+    </footer>
+  
+  <script data-goatcounter="https://brconfecciones.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
 
+  <script>
+    window.goatcounter = {no_counts: true};
+    fetch('https://brconfecciones.goatcounter.com/counts?callback=noop')
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById('goatcounter-visitas').textContent = 
+          'Visitas: ' + data.count;
+      })
+      .catch(() => {
+        document.getElementById('goatcounter-visitas').textContent = 'Visitas: --';
+      });
+  </script>
 </body>
 </html>
+
 
 
 
