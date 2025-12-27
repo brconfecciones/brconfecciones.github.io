@@ -344,23 +344,27 @@
     <div id="goatcounter-visitas" style="font-size: 0.85em; color: #b8a580; margin-top: 10px;"></div>
   </footer>
 
-  <script data-goatcounter="https://brconfecciones.goatcounter.com/count"
-          async src="//gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://brconfecciones.goatcounter.com/count"
+        async src="https://gc.zgo.at/count.js"></script>
 
-  <script>
-    window.goatcounter = {no_counts: true};
-    fetch('https://brconfecciones.goatcounter.com/counts?callback=noop')
-      .then(r => r.json())
-      .then(data => {
-        document.getElementById('goatcounter-visitas').textContent = 
-          'Visitas: ' + data.count;
-      })
-      .catch(() => {
-        document.getElementById('goatcounter-visitas').textContent = 'Visitas: --';
-      });
-  </script>
+<script>
+  window.goatcounter = {no_counts: true};
+  fetch('https://brconfecciones.goatcounter.com/counts?callback=noop')
+    .then(r => {
+      if (!r.ok) throw new Error('Network response was not ok');
+      return r.json();
+    })
+    .then(data => {
+      document.getElementById('goatcounter-visitas').textContent = 'Visitas: ' + (data.count || 0);
+    })
+    .catch(err => {
+      console.warn('GoatCounter fetch error:', err);
+      document.getElementById('goatcounter-visitas').textContent = 'Visitas: --';
+    });
+</script>
 </body>
 </html>
+
 
 
 
